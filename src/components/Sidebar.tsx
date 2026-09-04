@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 import {
+  Home,
   LayoutDashboard,
   RefreshCw,
   ClipboardList,
@@ -16,7 +17,8 @@ import {
 } from 'lucide-react';
 
 const navItems = [
-  { href: '/', label: 'Dashboard', icon: LayoutDashboard, badge: null },
+  { href: '/', label: 'Home', icon: Home, badge: null },
+  { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard, badge: null },
   { href: '/recovery', label: 'Recovery Hub', icon: RefreshCw, badge: 'Live' },
   { href: '/transactions', label: 'Transactions', icon: CreditCard, badge: null },
   { href: '/audit', label: 'Audit Trail', icon: ClipboardList, badge: null },
