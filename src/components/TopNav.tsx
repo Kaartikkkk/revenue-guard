@@ -8,7 +8,7 @@ export function TopNav() {
   const [showNotifications, setShowNotifications] = useState(false);
 
   return (
-    <header className="h-16 px-8 flex items-center justify-between border-b border-slate-800/80 bg-[#060913]/85 backdrop-blur-xl select-none shrink-0 z-10">
+    <header className="h-16 px-8 flex items-center justify-between border-b border-slate-800/50 bg-[#060913]/50 backdrop-blur-md select-none shrink-0 z-10">
       {/* Search Input */}
       <div className="relative w-96 group">
         <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 group-hover:text-blue-400 transition-colors" />
