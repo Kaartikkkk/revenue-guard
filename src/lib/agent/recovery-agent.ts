@@ -265,9 +265,9 @@ export async function executeStrategy(
           incrementRetryCount(payment.id);
           updateRecoveryAttempt(attempt.id, {
             status: 'success',
-            result: `Payment link created: ${(paymentLink as Record<string, unknown>).short_url}`,
-            payment_link_id: (paymentLink as Record<string, unknown>).id as string,
-            payment_link_url: (paymentLink as Record<string, unknown>).short_url as string,
+            result: `Payment link created: ${(paymentLink as unknown as Record<string, unknown>).short_url}`,
+            payment_link_id: (paymentLink as unknown as Record<string, unknown>).id as string,
+            payment_link_url: (paymentLink as unknown as Record<string, unknown>).short_url as string,
           });
 
           insertAuditLog({
@@ -275,8 +275,8 @@ export async function executeStrategy(
             recovery_attempt_id: attempt.id,
             action: 'payment_link_created',
             details: {
-              paymentLinkId: (paymentLink as Record<string, unknown>).id,
-              paymentLinkUrl: (paymentLink as Record<string, unknown>).short_url,
+              paymentLinkId: (paymentLink as unknown as Record<string, unknown>).id,
+              paymentLinkUrl: (paymentLink as unknown as Record<string, unknown>).short_url,
               message: recoveryMessage,
             },
           });
@@ -287,7 +287,7 @@ export async function executeStrategy(
             strategy: decision.strategy,
             message: `Recovery payment link created successfully`,
             details: {
-              paymentLinkUrl: (paymentLink as Record<string, unknown>).short_url,
+              paymentLinkUrl: (paymentLink as unknown as Record<string, unknown>).short_url,
               message: recoveryMessage,
             },
             requiresApproval: false,
@@ -340,14 +340,14 @@ export async function executeStrategy(
           const recoveryMessage = await generateRecoveryMessage(
             payment,
             diagnosis,
-            (paymentLink as Record<string, unknown>).short_url as string
+            (paymentLink as unknown as Record<string, unknown>).short_url as string
           );
 
           updateRecoveryAttempt(attempt.id, {
             status: 'success',
             result: `Payment link sent to ${payment.customer_email}`,
-            payment_link_id: (paymentLink as Record<string, unknown>).id as string,
-            payment_link_url: (paymentLink as Record<string, unknown>).short_url as string,
+            payment_link_id: (paymentLink as unknown as Record<string, unknown>).id as string,
+            payment_link_url: (paymentLink as unknown as Record<string, unknown>).short_url as string,
           });
 
           insertAuditLog({
@@ -355,8 +355,8 @@ export async function executeStrategy(
             recovery_attempt_id: attempt.id,
             action: 'payment_link_created',
             details: {
-              paymentLinkId: (paymentLink as Record<string, unknown>).id,
-              paymentLinkUrl: (paymentLink as Record<string, unknown>).short_url,
+              paymentLinkId: (paymentLink as unknown as Record<string, unknown>).id,
+              paymentLinkUrl: (paymentLink as unknown as Record<string, unknown>).short_url,
               sentTo: payment.customer_email,
               message: recoveryMessage,
             },
@@ -382,7 +382,7 @@ export async function executeStrategy(
             strategy: 'payment_link',
             message: `Payment link created and sent to ${payment.customer_email}`,
             details: {
-              paymentLinkUrl: (paymentLink as Record<string, unknown>).short_url,
+              paymentLinkUrl: (paymentLink as unknown as Record<string, unknown>).short_url,
               message: recoveryMessage,
             },
             requiresApproval: false,

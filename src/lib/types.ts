@@ -107,6 +107,12 @@ export interface SimulationScenario {
   errorDescription: string;
 }
 
+export interface AgentConfig {
+  key: string;
+  value: string;
+  updated_at: string;
+}
+
 export interface WebhookEvent {
   entity: string;
   account_id: string;

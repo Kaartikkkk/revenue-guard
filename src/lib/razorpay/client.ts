@@ -97,7 +97,7 @@ export async function createPaymentLink(data: {
     payload.expire_by = Math.floor(Date.now() / 1000) + data.expireByMinutes * 60;
   }
 
-  return withRetry(() => rz.paymentLink.create(payload as Parameters<typeof rz.paymentLink.create>[0]), {
+  return withRetry(() => rz.paymentLink.create(payload as unknown as Parameters<typeof rz.paymentLink.create>[0]), {
     onRetry: (err, attempt) => {
       console.warn(`[Razorpay] Retry ${attempt} for createPaymentLink: ${err.message}`);
     },

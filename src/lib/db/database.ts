@@ -10,6 +10,7 @@ import {
   RecoveryStatus,
   FailureCategory,
   RecoveryStrategy,
+  AgentConfig,
 } from '../types';
 
 const DB_PATH = path.join(process.cwd(), 'data', 'revenueguard.db');
