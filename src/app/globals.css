@@ -2,19 +2,20 @@
 
 @layer base {
   :root {
-    --bg-dark: #070a12;
-    --bg-sidebar: #0b101d;
-    --bg-card: #0e1526;
-    --bg-card-hover: #131c33;
-    --border-color: #1a243a;
-    --border-card: rgba(255, 255, 255, 0.07);
-    
-    --accent-blue: #2563eb;
-    --accent-cyan: #06b6d4;
-    --accent-emerald: #10b981;
-    --accent-amber: #f59e0b;
-    --accent-rose: #f43f5e;
-    --accent-purple: #8b5cf6;
+    --bg-dark: #060913;
+    --bg-sidebar: #090e1a;
+    --bg-card: #0d1527;
+    --bg-card-hover: #121c33;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-hover: rgba(99, 102, 241, 0.35);
+
+    --neon-cyan: #06b6d4;
+    --neon-blue: #3b82f6;
+    --neon-indigo: #6366f1;
+    --neon-purple: #a855f7;
+    --neon-emerald: #10b981;
+    --neon-amber: #f59e0b;
+    --neon-rose: #f43f5e;
   }
 }
 
@@ -25,31 +26,120 @@
 
 body {
   background-color: var(--bg-dark);
-  color: #f1f5f9;
+  color: #f8fafc;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   overflow-x: hidden;
 }
 
-/* Glassmorphism Card Style matching Mockup */
+/* Background Cyber Mesh Grid Overlay */
+.bg-cyber-grid {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+
+/* App Background Artwork & Ambient Lighting Overlay */
+.app-bg-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.app-bg-image {
+  position: absolute;
+  inset: 0;
+  background-image: url('/background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.16;
+  filter: saturate(1.25) contrast(1.1);
+  transform: scale(1.02);
+}
+
+.app-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 15% 20%, rgba(99, 102, 241, 0.18) 0%, transparent 45%),
+    radial-gradient(circle at 85% 85%, rgba(6, 182, 212, 0.16) 0%, transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.08) 0%, transparent 60%),
+    linear-gradient(to bottom, rgba(7, 10, 18, 0.78) 0%, rgba(7, 10, 18, 0.88) 60%, rgba(7, 10, 18, 0.96) 100%);
+}
+
+/* Glassmorphism Card Style with Neon Glow on Hover */
 .mockup-card {
-  background: #0e1526;
+  background: rgba(13, 21, 39, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 1rem;
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  border-radius: 1.25rem;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mockup-card:hover {
+  border-color: rgba(99, 102, 241, 0.35);
+  box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.7), 0 0 25px rgba(99, 102, 241, 0.12);
+  transform: translateY(-2px);
 }
 
 .mockup-hero-card {
-  background: linear-gradient(135deg, rgba(6, 182, 212, 0.12) 0%, rgba(16, 185, 129, 0.15) 40%, rgba(15, 23, 42, 0.95) 100%);
-  border: 1px solid rgba(16, 185, 129, 0.25);
-  border-radius: 1.25rem;
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.15) 0%, rgba(16, 185, 129, 0.18) 40%, rgba(13, 21, 39, 0.95) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  border-radius: 1.5rem;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 20px 50px -15px rgba(6, 182, 212, 0.2);
 }
 
 .mockup-promo-card {
   background: linear-gradient(135deg, #1e1b4b 0%, #311075 50%, #1e1035 100%);
-  border: 1px solid rgba(139, 92, 246, 0.3);
+  border: 1px solid rgba(139, 92, 246, 0.4);
   border-radius: 1.25rem;
+  box-shadow: 0 10px 25px rgba(139, 92, 246, 0.2);
+}
+
+/* Gradient Text Utilities */
+.gradient-text-cyan {
+  background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 50%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-purple {
+  background: linear-gradient(135deg, #c084fc 0%, #a855f7 50%, #6366f1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-emerald {
+  background: linear-gradient(135deg, #34d399 0%, #10b981 50%, #059669 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Shimmer Wave Animation */
+@keyframes shimmerWave {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+.shimmer-over {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-over::after {
+  content: "";
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.08) 50%, transparent 100%);
+  transform: translateX(-100%);
+  animation: shimmerWave 3s infinite;
 }
 
 /* Custom Scrollbar */
@@ -58,7 +148,7 @@ body {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #070a12;
+  background: #060913;
 }
 ::-webkit-scrollbar-thumb {
   background: #1e293b;

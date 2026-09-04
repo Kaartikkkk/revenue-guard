@@ -26,12 +26,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`${fontSans.className} bg-[#070a12] text-slate-100 antialiased selection:bg-blue-600 selection:text-white`}>
-        <div className="flex h-screen overflow-hidden bg-[#070a12] font-sans">
+      <body className={`${fontSans.className} bg-[#070a12] text-slate-100 antialiased selection:bg-blue-600 selection:text-white relative`}>
+        {/* Ambient Background Artwork & Lighting Layer */}
+        <div className="app-bg-container">
+          <div className="app-bg-image" />
+          <div className="app-bg-overlay" />
+          <div className="bg-cyber-grid absolute inset-0 opacity-40" />
+        </div>
+
+        <div className="relative z-10 flex h-screen overflow-hidden bg-transparent font-sans">
           <Sidebar />
           <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
             <TopNav />
-            <main className="flex-1 overflow-y-auto bg-[#070a12]">
+            <main className="flex-1 overflow-y-auto bg-transparent">
               {children}
             </main>
           </div>
