@@ -94,46 +94,30 @@ export function Sidebar() {
         </nav>
       </div>
 
-      <div className="space-y-4 pt-4">
-        {/* Bottom Interactive Promo Card */}
-        <motion.div
-          whileHover={{ scale: 1.02 }}
-          className="mockup-promo-card p-4 relative overflow-hidden text-white shadow-2xl cursor-pointer group"
-        >
-          <div className="w-8 h-8 rounded-xl bg-white/15 flex items-center justify-center mb-3 shadow-inner group-hover:scale-110 transition-transform">
-            <Zap className="w-4 h-4 text-amber-300 fill-amber-300" />
+      <div className="space-y-3 pt-4 border-t border-slate-800/80">
+        {/* System Status Pill */}
+        <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-xs font-semibold text-slate-300 space-y-1.5">
+          <div className="flex items-center justify-between text-[11px]">
+            <span className="text-slate-400">AI Engine</span>
+            <span className="text-emerald-400 font-bold flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> Gemini Active
+            </span>
           </div>
-          <h3 className="text-sm font-extrabold leading-snug tracking-tight">
-            Smarter<br />
-            Recoveries<br />
-            Higher Revenue
-          </h3>
-          <p className="text-[10px] text-purple-200/80 font-bold mt-2 flex items-center gap-1">
-            <span>Detect • Resolve • Grow</span>
-            <Sparkles className="w-3 h-3 text-amber-300" />
-          </p>
-
-          {/* Animated Background Wave */}
-          <svg className="absolute bottom-0 right-0 w-32 h-16 opacity-35 pointer-events-none group-hover:scale-110 transition-transform" viewBox="0 0 100 50">
-            <path d="M0 30 Q 25 10, 50 30 T 100 20 L 100 50 L 0 50 Z" fill="url(#sidebarWave)" />
-            <defs>
-              <linearGradient id="sidebarWave" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stopColor="#8b5cf6" />
-                <stop offset="100%" stopColor="#06b6d4" />
-              </linearGradient>
-            </defs>
-          </svg>
-        </motion.div>
+          <div className="flex items-center justify-between text-[11px]">
+            <span className="text-slate-400">Gateway</span>
+            <span className="text-blue-400 font-bold">Razorpay API</span>
+          </div>
+        </div>
 
         {/* User Profile Footer */}
-        <div className="pt-2 border-t border-slate-800/80 flex items-center justify-between group cursor-pointer">
+        <div className="pt-1 flex items-center justify-between group cursor-pointer">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center font-extrabold text-xs text-white shadow-md shadow-blue-600/30">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center font-extrabold text-xs text-white shadow-md">
               K
             </div>
             <div>
-              <p className="text-xs font-extrabold text-slate-200 group-hover:text-white transition-colors">Kartik Lamba</p>
-              <p className="text-[10px] text-slate-400 font-semibold">Operator • Admin</p>
+              <p className="text-xs font-bold text-slate-200 group-hover:text-white transition-colors">Kartik Lamba</p>
+              <p className="text-[10px] text-slate-400 font-medium">Operator • Admin</p>
             </div>
           </div>
           <ChevronRight className="w-4 h-4 text-slate-500 group-hover:text-slate-300 group-hover:translate-x-0.5 transition-all" />

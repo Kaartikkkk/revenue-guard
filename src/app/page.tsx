@@ -178,9 +178,9 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen text-slate-100 font-sans selection:bg-blue-600 selection:text-white flex flex-col relative bg-[#070a12]">
-      {/* Top Header Navbar overlaying video */}
-      <header className="absolute top-0 left-0 right-0 z-50 bg-[#070a12]/20 backdrop-blur-sm border-b border-white/10 px-6 py-4 transition-all">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
+      {/* Floating Top Header Navbar overlaying video with smaller width */}
+      <header className="absolute top-4 left-1/2 -translate-x-1/2 w-[92%] max-w-5xl z-50 bg-[#091124]/50 backdrop-blur-md border border-cyan-500/30 rounded-2xl px-6 py-3 shadow-xl shadow-cyan-950/30 transition-all">
+        <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 group">
             <div className="relative">
               <img
