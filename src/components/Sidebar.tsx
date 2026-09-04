@@ -17,9 +17,9 @@ import {
 const navItems = [
   { href: '/', label: 'Dashboard', icon: LayoutDashboard, badge: null },
   { href: '/recovery', label: 'Recovery Hub', icon: RefreshCw, badge: 'Live' },
-  { href: '/audit', label: 'Transactions', icon: CreditCard, badge: null },
+  { href: '/transactions', label: 'Transactions', icon: CreditCard, badge: null },
   { href: '/audit', label: 'Audit Trail', icon: ClipboardList, badge: null },
-  { href: '/simulate', label: 'Analytics', icon: BarChart3, badge: null },
+  { href: '/analytics', label: 'Analytics', icon: BarChart3, badge: null },
   { href: '/simulate', label: 'Simulation Lab', icon: Zap, badge: null },
   { href: '/settings', label: 'Settings', icon: Settings, badge: null },
 ];
