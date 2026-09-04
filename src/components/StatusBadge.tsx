@@ -1,130 +1,40 @@
 'use client';
 
-import { CheckCircle2, Clock, AlertTriangle, XCircle, RefreshCw, ShieldAlert } from 'lucide-react';
-
 interface StatusBadgeProps {
   status: string;
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md';
 }
 
-const statusConfig: Record<string, { label: string; bg: string; text: string; border: string; glow: string; icon: any }> = {
-  failed: { 
-    label: 'Failed', 
-    bg: 'bg-rose-500/10', 
-    text: 'text-rose-400', 
-    border: 'border-rose-500/25', 
-    glow: 'shadow-rose-500/20',
-    icon: XCircle
-  },
-  recovering: { 
-    label: 'Recovering', 
-    bg: 'bg-indigo-500/15', 
-    text: 'text-indigo-300', 
-    border: 'border-indigo-500/30', 
-    glow: 'shadow-indigo-500/20',
-    icon: RefreshCw
-  },
-  recovered: { 
-    label: 'Recovered', 
-    bg: 'bg-emerald-500/15', 
-    text: 'text-emerald-300', 
-    border: 'border-emerald-500/30', 
-    glow: 'shadow-emerald-500/20',
-    icon: CheckCircle2
-  },
-  pending_approval: { 
-    label: 'Human Approval Required', 
-    bg: 'bg-amber-500/15', 
-    text: 'text-amber-300', 
-    border: 'border-amber-500/35', 
-    glow: 'shadow-amber-500/20',
-    icon: ShieldAlert
-  },
-  abandoned: { 
-    label: 'Abandoned', 
-    bg: 'bg-slate-800/60', 
-    text: 'text-slate-400', 
-    border: 'border-slate-700/50', 
-    glow: 'shadow-none',
-    icon: AlertTriangle
-  },
-  pending: { 
-    label: 'Pending', 
-    bg: 'bg-amber-500/15', 
-    text: 'text-amber-300', 
-    border: 'border-amber-500/30', 
-    glow: 'shadow-amber-500/20',
-    icon: Clock
-  },
-  in_progress: { 
-    label: 'In Progress', 
-    bg: 'bg-blue-500/15', 
-    text: 'text-blue-300', 
-    border: 'border-blue-500/30', 
-    glow: 'shadow-blue-500/20',
-    icon: RefreshCw
-  },
-  success: { 
-    label: 'Success', 
-    bg: 'bg-emerald-500/15', 
-    text: 'text-emerald-300', 
-    border: 'border-emerald-500/30', 
-    glow: 'shadow-emerald-500/20',
-    icon: CheckCircle2
-  },
-  skipped: { 
-    label: 'Skipped', 
-    bg: 'bg-slate-800/60', 
-    text: 'text-slate-400', 
-    border: 'border-slate-700/50', 
-    glow: 'shadow-none',
-    icon: AlertTriangle
-  },
-  approved: { 
-    label: 'Approved', 
-    bg: 'bg-emerald-500/15', 
-    text: 'text-emerald-300', 
-    border: 'border-emerald-500/30', 
-    glow: 'shadow-emerald-500/20',
-    icon: CheckCircle2
-  },
-  rejected: { 
-    label: 'Rejected', 
-    bg: 'bg-rose-500/10', 
-    text: 'text-rose-400', 
-    border: 'border-rose-500/25', 
-    glow: 'shadow-rose-500/20',
-    icon: XCircle
-  },
+const statusMap: Record<string, { label: string; dotColor: string; textColor: string; border: string }> = {
+  failed: { label: 'Failed', dotColor: 'bg-rose-500', textColor: 'text-rose-400', border: 'border-rose-500/30 bg-rose-500/10' },
+  recovering: { label: 'Recovering', dotColor: 'bg-blue-400', textColor: 'text-blue-400', border: 'border-blue-500/30 bg-blue-500/10' },
+  recovered: { label: 'Recovered', dotColor: 'bg-emerald-400', textColor: 'text-emerald-400', border: 'border-emerald-500/30 bg-emerald-500/10' },
+  pending_approval: { label: 'Pending Approval', dotColor: 'bg-amber-400', textColor: 'text-amber-400', border: 'border-amber-500/30 bg-amber-500/10' },
+  abandoned: { label: 'Abandoned', dotColor: 'bg-zinc-500', textColor: 'text-zinc-400', border: 'border-zinc-700 bg-zinc-800/40' },
+  pending: { label: 'Pending', dotColor: 'bg-amber-400', textColor: 'text-amber-400', border: 'border-amber-500/30 bg-amber-500/10' },
+  in_progress: { label: 'In Progress', dotColor: 'bg-blue-400', textColor: 'text-blue-400', border: 'border-blue-500/30 bg-blue-500/10' },
+  success: { label: 'Success', dotColor: 'bg-emerald-400', textColor: 'text-emerald-400', border: 'border-emerald-500/30 bg-emerald-500/10' },
+  approved: { label: 'Approved', dotColor: 'bg-emerald-400', textColor: 'text-emerald-400', border: 'border-emerald-500/30 bg-emerald-500/10' },
+  rejected: { label: 'Rejected', dotColor: 'bg-rose-500', textColor: 'text-rose-400', border: 'border-rose-500/30 bg-rose-500/10' },
 };
 
 export function StatusBadge({ status, size = 'sm' }: StatusBadgeProps) {
-  const config = statusConfig[status] || {
+  const config = statusMap[status] || {
     label: status,
-    bg: 'bg-slate-800/60',
-    text: 'text-slate-400',
-    border: 'border-slate-700/50',
-    glow: 'shadow-none',
-    icon: Clock,
-  };
-
-  const Icon = config.icon;
-  const isSpinner = status === 'recovering' || status === 'in_progress';
-
-  const sizeClasses = {
-    sm: 'px-2.5 py-1 text-[11px]',
-    md: 'px-3 py-1.5 text-xs',
-    lg: 'px-3.5 py-2 text-sm font-semibold',
+    dotColor: 'bg-zinc-500',
+    textColor: 'text-zinc-400',
+    border: 'border-zinc-700 bg-zinc-800/40',
   };
 
   return (
     <span
       className={`
-        inline-flex items-center gap-1.5 rounded-full border backdrop-blur-md font-semibold tracking-wide shadow-sm
-        transition-all duration-200 ${config.bg} ${config.text} ${config.border} ${config.glow} ${sizeClasses[size]}
+        inline-flex items-center gap-1.5 rounded border font-mono font-medium tracking-tight
+        ${config.border} ${config.textColor}
+        ${size === 'sm' ? 'px-2 py-0.5 text-[11px]' : 'px-2.5 py-1 text-xs'}
       `}
     >
-      <Icon className={`w-3.5 h-3.5 ${isSpinner ? 'animate-spin text-indigo-400' : ''}`} />
+      <span className={`w-1.5 h-1.5 rounded-full ${config.dotColor}`} />
       <span>{config.label}</span>
     </span>
   );

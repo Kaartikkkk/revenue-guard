@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import {
   Settings,
   Save,
@@ -96,20 +95,20 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="p-8 max-w-4xl mx-auto space-y-6 pb-16">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 glass-card p-6 rounded-3xl border border-slate-800/80">
+    <div className="p-8 max-w-5xl mx-auto space-y-6 pb-16 font-sans select-none">
+      {/* Header Bar */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-indigo-500/15 text-indigo-400 border border-indigo-500/30">
-              Policy & Safety Configuration
+            <span className="px-3 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-blue-500/20 text-blue-400 border border-blue-500/30">
+              Agent Control Center
             </span>
           </div>
           <h1 className="text-2xl font-extrabold text-white tracking-tight flex items-center gap-3">
-            Agent <span className="gradient-text-blue">Settings & Governance</span>
+            Governance & <span className="text-blue-400">Settings</span>
           </h1>
-          <p className="text-xs text-slate-400 mt-1">
-            Configure safety boundaries, human-in-the-loop thresholds, and daily budget caps.
+          <p className="text-xs text-slate-400 font-medium mt-0.5">
+            Configure safety thresholds, human approval limits, and maximum budget caps.
           </p>
         </div>
 
@@ -117,10 +116,10 @@ export default function SettingsPage() {
           onClick={handleSave}
           disabled={saving}
           className={`
-            flex items-center gap-2.5 px-6 py-3 text-xs font-extrabold rounded-xl transition-all shadow-lg
+            flex items-center gap-2.5 px-6 py-3 text-xs font-extrabold rounded-xl transition-all shadow-lg shrink-0
             ${saved
               ? 'bg-emerald-600 text-white shadow-emerald-600/30'
-              : 'text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 shadow-indigo-500/30 hover:scale-105 active:scale-95'
+              : 'text-white bg-blue-600 hover:bg-blue-500 shadow-blue-600/30 hover:scale-105 active:scale-95'
             } disabled:opacity-50
           `}
         >
@@ -132,7 +131,7 @@ export default function SettingsPage() {
           ) : saving ? (
             <>
               <RefreshCw className="w-4 h-4 animate-spin" />
-              Saving Configuration...
+              Saving Settings...
             </>
           ) : (
             <>
@@ -146,34 +145,21 @@ export default function SettingsPage() {
       {loading ? (
         <div className="space-y-4">
           {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="h-24 bg-slate-900/40 rounded-2xl animate-pulse" />
+            <div key={i} className="h-24 bg-slate-900 rounded-2xl animate-pulse" />
           ))}
         </div>
       ) : (
         <div className="space-y-4">
-          <div className="flex items-center gap-2 pt-2">
-            <Shield className="w-4 h-4 text-indigo-400" />
-            <h2 className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-              Bounded Control & Risk Controls
-            </h2>
-          </div>
-
-          {configs.map((config, idx) => {
+          {configs.map((config) => {
             const meta = configMeta[config.key];
             if (!meta) return null;
             const Icon = meta.icon;
 
             return (
-              <motion.div
-                key={config.key}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.04 }}
-                className="glass-card rounded-2xl border border-slate-800/80 p-5"
-              >
+              <div key={config.key} className="mockup-card p-5">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center shrink-0 text-indigo-400 shadow-inner">
+                    <div className="w-10 h-10 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center shrink-0 text-blue-400 shadow-md">
                       <Icon className="w-5 h-5" />
                     </div>
                     <div>
@@ -181,13 +167,13 @@ export default function SettingsPage() {
                       <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">{config.description}</p>
 
                       {meta.unit === 'paise' && editedValues[config.key] && (
-                        <p className="text-xs font-mono font-bold text-indigo-400 mt-1.5 bg-indigo-500/10 px-2.5 py-0.5 rounded-lg border border-indigo-500/20 inline-block">
-                          Value: {formatPaiseDisplay(editedValues[config.key])}
+                        <p className="text-xs font-mono font-bold text-blue-400 mt-1.5 bg-blue-500/10 px-2.5 py-0.5 rounded-lg border border-blue-500/20 inline-block">
+                          Formatted Value: {formatPaiseDisplay(editedValues[config.key])}
                         </p>
                       )}
                       {meta.unit === 'ms' && editedValues[config.key] && (
-                        <p className="text-xs font-mono font-bold text-indigo-400 mt-1.5 bg-indigo-500/10 px-2.5 py-0.5 rounded-lg border border-indigo-500/20 inline-block">
-                          Value: {formatMsDisplay(editedValues[config.key])}
+                        <p className="text-xs font-mono font-bold text-blue-400 mt-1.5 bg-blue-500/10 px-2.5 py-0.5 rounded-lg border border-blue-500/20 inline-block">
+                          Formatted Value: {formatMsDisplay(editedValues[config.key])}
                         </p>
                       )}
                     </div>
@@ -202,48 +188,45 @@ export default function SettingsPage() {
                             [config.key]: prev[config.key] === 'true' ? 'false' : 'true',
                           }))
                         }
-                        className="flex items-center gap-3 px-4 py-2 rounded-xl bg-slate-900 border border-slate-800"
+                        className="flex items-center gap-3 px-4 py-2 rounded-xl bg-[#0b101d] border border-slate-800"
                       >
                         {editedValues[config.key] === 'true' ? (
                           <ToggleRight className="w-8 h-8 text-emerald-400" />
                         ) : (
-                          <ToggleLeft className="w-8 h-8 text-slate-600" />
+                          <ToggleLeft className="w-8 h-8 text-slate-500" />
                         )}
                         <span className={`text-xs font-extrabold ${editedValues[config.key] === 'true' ? 'text-emerald-400' : 'text-slate-500'}`}>
                           {editedValues[config.key] === 'true' ? 'Active' : 'Disabled'}
                         </span>
                       </button>
                     ) : (
-                      <div className="relative">
-                        <input
-                          type="number"
-                          value={editedValues[config.key] || ''}
-                          onChange={(e) =>
-                            setEditedValues((prev) => ({
-                              ...prev,
-                              [config.key]: e.target.value,
-                            }))
-                          }
-                          className="w-44 bg-slate-900 text-white text-sm font-mono font-bold rounded-xl px-4 py-2.5 border border-slate-800 focus:border-indigo-500 focus:outline-none text-right shadow-inner"
-                        />
-                      </div>
+                      <input
+                        type="number"
+                        value={editedValues[config.key] || ''}
+                        onChange={(e) =>
+                          setEditedValues((prev) => ({
+                            ...prev,
+                            [config.key]: e.target.value,
+                          }))
+                        }
+                        className="w-44 bg-[#0b101d] text-white text-sm font-mono font-bold rounded-xl px-4 py-2.5 border border-slate-800 focus:border-blue-500 focus:outline-none text-right shadow-inner"
+                      />
                     )}
                   </div>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
 
-          {/* Safety Notice Card */}
-          <div className="glass-card rounded-2xl border border-amber-500/30 p-5 flex items-start gap-4 bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-transparent mt-6">
+          {/* Safety Banner */}
+          <div className="mockup-card p-5 flex items-start gap-4 bg-gradient-to-r from-amber-500/10 via-[#0e1526] to-[#0e1526] border border-amber-500/30">
             <Lock className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
             <div className="space-y-1">
               <h4 className="text-xs font-extrabold text-amber-300 uppercase tracking-wide">
-                Safety & Bounded Execution Policy
+                Safety & Human Approval Boundaries
               </h4>
               <p className="text-xs text-amber-200/80 leading-relaxed font-medium">
-                Every policy modification is immediately stored in SQLite and enforced on live Razorpay webhooks.
-                Transactions exceeding the Human Gate Threshold (default ₹5,000) are automatically halted until manual approval is granted.
+                Changes saved here take immediate effect across all live Razorpay webhooks. Transactions exceeding the Human Gate Threshold (default ₹5,000) will automatically pause for merchant approval.
               </p>
             </div>
           </div>
